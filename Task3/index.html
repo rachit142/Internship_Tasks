@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Temperature Converter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Fun Google Font -->
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:700,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="converter-bg">
+    <section class="converter-card">
+      <div class="icon-anim">
+        <span class="icon-cold">❄️</span>
+        <span class="icon-hot">🔥</span>
+      </div>
+      <h1 class="title">Temperature Converter</h1>
+      <form id="tempForm" autocomplete="off">
+        <div class="input-group">
+          <input type="text" id="tempInput" placeholder="Enter temperature" required>
+        </div>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="unitFrom" value="C" checked>
+            <span class="radio-circle"></span>
+            Celsius
+          </label>
+          <label>
+            <input type="radio" name="unitFrom" value="F">
+            <span class="radio-circle"></span>
+            Fahrenheit
+          </label>
+          <label>
+            <input type="radio" name="unitFrom" value="K">
+            <span class="radio-circle"></span>
+            Kelvin
+          </label>
+        </div>
+        <div class="arrow-anim">⬇️</div>
+        <div class="radio-group to-group">
+          <label>
+            <input type="radio" name="unitTo" value="C">
+            <span class="radio-circle"></span>
+            Celsius
+          </label>
+          <label>
+            <input type="radio" name="unitTo" value="F" checked>
+            <span class="radio-circle"></span>
+            Fahrenheit
+          </label>
+          <label>
+            <input type="radio" name="unitTo" value="K">
+            <span class="radio-circle"></span>
+            Kelvin
+          </label>
+        </div>
+        <button type="submit" class="convert-btn">Convert</button>
+      </form>
+      <div id="result" class="result-box hidden"></div>
+    </section>
+    <footer>
+      <p>Made by <strong>Rachit Pareek</strong> • <span class="footer-emoji">🌡️</span></p>
+    </footer>
+  </main>
+  <script>
+    const form = document.getElementById('tempForm');
+    const tempInput = document.getElementById('tempInput');
+    const resultBox = document.getElementById('result');
+
+    function convertTemperature(value, from, to) {
+      let tempC;
+
+      // Normalize to Celsius
+      if (from === 'C') tempC = value;
+      else if (from === 'F') tempC = (value - 32) * 5/9;
+      else if (from === 'K') tempC = value - 273.15;
+
+      let result;
+      // Convert from Celsius to target
+      if (to === 'C') result = tempC;
+      else if (to === 'F') result = tempC * 9/5 + 32;
+      else if (to === 'K') result = tempC + 273.15;
+
+      return result;
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const value = parseFloat(tempInput.value);
+      const from = form.unitFrom.value;
+      const to = form.unitTo.value;
+
+      // Validation
+      if (isNaN(value)) {
+        resultBox.textContent = 'Please enter a valid number!';
+        resultBox.classList.remove('hidden');
+        resultBox.classList.add('error');
+        return;
+      }
+      if (from === to) {
+        resultBox.textContent = 'Please select different units to convert!';
+        resultBox.classList.remove('hidden');
+        resultBox.classList.add('error');
+        return;
+      }
+
+      // Kelvin can't be negative
+      if ((from === 'K' && value < 0) || (from !== 'K' && to === 'K' && convertTemperature(value, from, 'K') < 0)) {
+        resultBox.textContent = 'Kelvin cannot be negative!';
+        resultBox.classList.remove('hidden');
+        resultBox.classList.add('error');
+        return;
+      }
+
+      const converted = convertTemperature(value, from, to);
+      const units = { C: "°C", F: "°F", K: "K" };
+      resultBox.textContent = `${value} ${units[from]} = ${converted.toFixed(2)} ${units[to]}`;
+      resultBox.classList.remove('hidden', 'error');
+      resultBox.classList.add('success');
+    });
+  </script>
+</body>
+</html>
