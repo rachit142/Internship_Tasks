@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" class="display" disabled value="0">
+    <div class="buttons">
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button>/</button>
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button>*</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>-</button>
+      <button>0</button>
+      <button>.</button>
+      <button>=</button>
+      <button>+</button>
+    </div>
+    <button id="clear" class="clear">C</button>
+  </div>
+  <script>
+    const display = document.getElementById('display');
+    const buttons = document.querySelectorAll('.buttons button');
+    const clearBtn = document.getElementById('clear');
+    let current = "";
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const value = btn.textContent;
+        if (value === '=') {
+          try {
+            current = eval(current).toString();
+            display.value = current;
+          } catch {
+            display.value = "Error";
+            current = "";
+          }
+        } else {
+          if (display.value === "0" || display.value === "Error") current = "";
+          current += value;
+          display.value = current;
+        }
+      });
+    });
+
+    clearBtn.addEventListener('click', () => {
+      current = "";
+      display.value = "0";
+    });
+  </script>
+</body>
+</html>
