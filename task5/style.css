@@ -1,0 +1,133 @@
+body {
+  background: linear-gradient(135deg, #dbe6e4 0%, #b3c0e6 100%);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+.container {
+  background: #fff;
+  max-width: 430px;
+  margin: 40px auto 0 auto;
+  border-radius: 11px;
+  box-shadow: 0 4px 24px #98a8d050;
+  padding: 2rem 1.2rem 2rem 1.2rem;
+}
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #46548a;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+form {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+}
+form input[type="text"] {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border-radius: 7px;
+  border: 1.5px solid #b3c0e6;
+  font-size: 1rem;
+  background: #f8fafc;
+  color: #344273;
+  transition: border 0.2s;
+}
+form input[type="text"]:focus {
+  border: 1.5px solid #46548a;
+  outline: none;
+}
+form button {
+  padding: 0.58rem 1.2rem;
+  border: none;
+  border-radius: 7px;
+  background: #46548a;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+form button:hover {
+  background: #2a3864;
+}
+section {
+  margin-bottom: 1.1rem;
+}
+section h2 {
+  font-size: 1.13rem;
+  color: #4b5e90;
+  margin: 0 0 0.6rem 0;
+  letter-spacing: 0.5px;
+}
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.todo-list li {
+  background: #f8fafc;
+  border: 1.3px solid #dae3f3;
+  border-radius: 8px;
+  margin-bottom: 0.7rem;
+  padding: 0.7rem 0.9rem 0.7rem 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  position: relative;
+}
+.todo-list li.completed {
+  background: #e9ffe6;
+  border: 1.3px solid #a6e5a3;
+  color: #6a7f63;
+}
+.task-text {
+  font-size: 1.08rem;
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+  word-break: break-word;
+}
+.task-time {
+  font-size: 0.87rem;
+  color: #8592b0;
+  margin-bottom: 0.3rem;
+}
+.todo-list li.completed .task-time {
+  color: #5a8e5c;
+}
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.1rem;
+}
+.actions button {
+  background: #eaefff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.21rem 0.56rem;
+  font-size: 1.08rem;
+  color: #46548a;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.actions button:hover {
+  background: #b3c0e6;
+  color: #fff;
+}
+.todo-list li.completed .actions button {
+  background: #d5f8d1;
+  color: #5a8e5c;
+}
+.todo-list li.completed .actions button:hover {
+  background: #a6e5a3;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    width: 96vw;
+    padding: 1.1rem 0.5rem 1.2rem 0.5rem;
+  }
+}
